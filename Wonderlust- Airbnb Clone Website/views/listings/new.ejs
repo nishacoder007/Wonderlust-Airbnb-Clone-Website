@@ -1,0 +1,112 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="form-card">
+  <h2>Create a New Listing</h2>
+  <form action="/listings" method="POST" class="needs-validation" novalidate>
+    
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input 
+        type="text" 
+        name="listing[title]" 
+        id="title" 
+        placeholder="Catchy, memorable title" 
+        required 
+      />
+      <div class="invalid-feedback">Please enter a valid title.</div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea 
+        name="listing[description]" 
+        id="description" 
+        cols="30" 
+        rows="4" 
+        placeholder="Provide details about rooms, amenities, unique traits, and location highlights..." 
+        required
+      ></textarea>
+      <div class="invalid-feedback">Please enter a listing description.</div>
+    </div>
+
+    <!-- Image Link -->
+    <div class="form-group">
+      <label for="image">Image URL</label>
+      <input 
+        type="url" 
+        name="listing[image][url]" 
+        id="image" 
+        placeholder="https://images.unsplash.com/... (optional)" 
+      />
+      <p style="font-size: 11px; color: var(--gray-text); margin-top: 4px;">Leave empty to use a premium default showcase photo.</p>
+    </div>
+
+    <!-- Price and Category row -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Price ($ per night)</label>
+        <input 
+          type="number" 
+          name="listing[price]" 
+          id="price" 
+          placeholder="120" 
+          min="0" 
+          required 
+        />
+        <div class="invalid-feedback">Price must be a positive number.</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select name="listing[category]" id="category" required>
+          <option value="" disabled selected>Select category...</option>
+          <option value="Trending">Trending</option>
+          <option value="Rooms">Rooms</option>
+          <option value="Iconic Cities">Iconic Cities</option>
+          <option value="Mountains">Mountains</option>
+          <option value="Castles">Castles</option>
+          <option value="Amazing Pools">Amazing Pools</option>
+          <option value="Camping">Camping</option>
+          <option value="Farms">Farms</option>
+          <option value="Arctic">Arctic</option>
+          <option value="Beachfront">Beachfront</option>
+          <option value="Cabins">Cabins</option>
+        </select>
+        <div class="invalid-feedback">Please select a category tag.</div>
+      </div>
+    </div>
+
+    <!-- Location & Country row -->
+    <div class="form-row">
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input 
+          type="text" 
+          name="listing[location]" 
+          id="location" 
+          placeholder="e.g., Paris, Kyoto" 
+          required 
+        />
+        <div class="invalid-feedback">Please enter a valid location city.</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="country">Country</label>
+        <input 
+          type="text" 
+          name="listing[country]" 
+          id="country" 
+          placeholder="e.g., France, Japan" 
+          required 
+        />
+        <div class="invalid-feedback">Please enter the country.</div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 16px; padding: 14px;">
+      <i class="fa-solid fa-circle-plus"></i> Create Listing
+    </button>
+  </form>
+</div>

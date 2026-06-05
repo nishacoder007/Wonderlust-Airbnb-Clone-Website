@@ -1,0 +1,50 @@
+<header class="navbar-wrapper">
+  <div class="container navbar">
+    <!-- Brand Logo -->
+    <a href="/listings" class="nav-brand">
+      <i class="fa-regular fa-compass"></i>
+      <span>Wonderlust</span>
+    </a>
+
+    <!-- Global Search Bar -->
+    <form action="/listings" method="GET" class="nav-search">
+      <input 
+        type="text" 
+        name="search" 
+        placeholder="Search destinations..." 
+        value="<%= typeof search !== 'undefined' ? search : '' %>"
+      />
+      <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+
+    <!-- Navigation Actions -->
+    <div class="nav-menu">
+      <a href="/listings" class="nav-link">Explore</a>
+      <a href="/listings/new" class="nav-link">Host Home</a>
+      
+      <% if (currUser) { %>
+        <!-- User Profile Dropdown Menu -->
+        <div class="nav-profile-menu">
+          <div class="nav-profile" id="profileDropdownBtn" title="Account Menu">
+            <i class="fa-solid fa-bars"></i>
+            <div class="profile-avatar">
+              <%= currUser.username.substring(0, 2).toUpperCase() %>
+            </div>
+          </div>
+          <div class="dropdown-menu" id="profileDropdown">
+            <div class="dropdown-item-header">Logged in as: <b><%= currUser.username %></b></div>
+            <hr>
+            <a href="/listings/new" class="dropdown-item"><i class="fa-solid fa-house-chimney" style="width: 18px; margin-right: 6px;"></i> Host a Home</a>
+            <hr>
+            <a href="/logout" class="dropdown-item text-danger"><i class="fa-solid fa-right-from-bracket" style="width: 18px; margin-right: 6px;"></i> Log Out</a>
+          </div>
+        </div>
+      <% } else { %>
+        <a href="/login" class="nav-link">Log In</a>
+        <a href="/signup" class="nav-link btn-secondary" style="padding: 8px 16px; border-radius: 20px; font-weight: 700;">Sign Up</a>
+      <% } %>
+    </div>
+  </div>
+</header>

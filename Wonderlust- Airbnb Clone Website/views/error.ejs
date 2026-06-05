@@ -1,0 +1,15 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="form-card" style="text-align: center; border-color: #ffcccc; background-color: #fffdfd; max-width: 600px;">
+  <i class="fa-solid fa-circle-exclamation" style="font-size: 56px; color: #ff3333; margin-bottom: 20px;"></i>
+  <h2 style="color: #ff3333; font-size: 26px; margin-bottom: 8px;">Error <%= statusCode %></h2>
+  <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: var(--dark-color);"><%= message %></h3>
+  
+  <p style="color: var(--gray-text); font-size: 14px; margin-bottom: 24px; line-height: 1.5;">
+    Something went wrong on our end. Please go back to the home page or try again in a few minutes.
+  </p>
+
+  <a href="/listings" class="btn-primary">
+    <i class="fa-solid fa-house"></i> Go to Homepage
+  </a>
+</div>

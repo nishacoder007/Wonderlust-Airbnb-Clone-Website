@@ -1,0 +1,42 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="form-card">
+  <h2>Log In to Wonderlust</h2>
+  
+  <form action="/login" method="POST" class="needs-validation" novalidate>
+    <!-- Username -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input 
+        type="text" 
+        name="username" 
+        id="username" 
+        placeholder="Enter your username" 
+        required 
+      />
+      <div class="invalid-feedback">Please enter your username.</div>
+    </div>
+
+    <!-- Password -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input 
+        type="password" 
+        name="password" 
+        id="password" 
+        placeholder="••••••••" 
+        required 
+      />
+      <div class="invalid-feedback">Please enter your password.</div>
+    </div>
+
+    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 16px; padding: 14px;">
+      <i class="fa-solid fa-right-to-bracket"></i> Log In
+    </button>
+  </form>
+
+  <p style="text-align: center; margin-top: 24px; font-size: 14px; color: var(--gray-text);">
+    Don't have an account yet? 
+    <a href="/signup" style="color: var(--brand-color); font-weight: 600; text-decoration: underline;">Sign Up</a>
+  </p>
+</div>

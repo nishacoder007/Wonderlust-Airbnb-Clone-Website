@@ -1,0 +1,121 @@
+<% layout("layouts/boilerplate") %>
+
+<!-- Category Filter Bar and Tax Toggle Row -->
+<div class="filters-container">
+  <!-- Categories Bar -->
+  <div class="categories-bar">
+    <div class="category-filter" onclick="window.location.href='/listings'" data-category="All">
+      <i class="fa-solid fa-globe"></i>
+      <span>All Homes</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Trending'" data-category="Trending">
+      <i class="fa-solid fa-fire"></i>
+      <span>Trending</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Rooms'" data-category="Rooms">
+      <i class="fa-solid fa-bed"></i>
+      <span>Rooms</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Iconic Cities'" data-category="Iconic Cities">
+      <i class="fa-solid fa-mountain-city"></i>
+      <span>Iconic Cities</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Mountains'" data-category="Mountains">
+      <i class="fa-solid fa-mountain"></i>
+      <span>Mountains</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Castles'" data-category="Castles">
+      <i class="fa-solid fa-fort-awesome"></i>
+      <span>Castles</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Amazing Pools'" data-category="Amazing Pools">
+      <i class="fa-solid fa-water-ladder"></i>
+      <span>Pools</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Camping'" data-category="Camping">
+      <i class="fa-solid fa-campground"></i>
+      <span>Camping</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Farms'" data-category="Farms">
+      <i class="fa-solid fa-tractor"></i>
+      <span>Farms</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Arctic'" data-category="Arctic">
+      <i class="fa-regular fa-snowflake"></i>
+      <span>Arctic</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Beachfront'" data-category="Beachfront">
+      <i class="fa-solid fa-umbrella-beach"></i>
+      <span>Beachfront</span>
+    </div>
+    <div class="category-filter" onclick="window.location.href='/listings?category=Cabins'" data-category="Cabins">
+      <i class="fa-solid fa-house-chimney"></i>
+      <span>Cabins</span>
+    </div>
+  </div>
+
+  <!-- Tax Switch Toggle -->
+  <div class="tax-toggle-wrapper">
+    <div class="tax-text">Display total with taxes</div>
+    <label class="switch">
+      <input type="checkbox" id="tax-toggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
+</div>
+
+<!-- Search / Filter Query Header -->
+<% if (typeof search !== 'undefined' && search) { %>
+  <h3 style="font-size: 18px; color: var(--gray-text); margin: 20px 0 10px 0;">
+    Search results for "<span style="color: var(--dark-color);"><%= search %></span>"
+  </h3>
+<% } else if (typeof category !== 'undefined' && category) { %>
+  <h3 style="font-size: 18px; color: var(--gray-text); margin: 20px 0 10px 0;">
+    Showing category: "<span style="color: var(--dark-color);"><%= category %></span>"
+  </h3>
+<% } %>
+
+<!-- Listings Catalog Grid -->
+<% if (allListings && allListings.length > 0) { %>
+  <div class="listings-grid">
+    <% for (let listing of allListings) { %>
+      <div class="listing-card" onclick="window.location.href='/listings/<%= listing._id %>'">
+        <div class="card-img-wrapper">
+          <img src="<%= listing.image.url %>" alt="<%= listing.title %>" loading="lazy" />
+          <button class="wishlist-btn" onclick="event.stopPropagation();">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="card-title-row">
+            <div class="card-title"><%= listing.title %></div>
+            <div class="card-rating">
+              <i class="fa-solid fa-star"></i>
+              <span><%= listing.reviews.length > 0 ? (listing.reviews.reduce((acc, r) => acc + r.rating, 0) / listing.reviews.length).toFixed(1) : "New" %></span>
+            </div>
+          </div>
+          <div class="card-location"><%= listing.location %>, <%= listing.country %></div>
+          <div class="card-price-row">
+            <!-- Base Price Display -->
+            <span class="base-price">
+              <span class="card-price">$<%= listing.price.toLocaleString("en-US") %></span> / night
+            </span>
+            <!-- Tax-Inclusive Price Display (swapped via JS) -->
+            <span class="tax-price" style="display: none;">
+              <span class="card-price">$<%= Math.round(listing.price * 1.18).toLocaleString("en-US") %></span> / night 
+              <span class="tax-info">incl. 18% GST</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+<% } else { %>
+  <!-- Empty State View -->
+  <div style="text-align: center; padding: 80px 20px; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; align-items: center;">
+    <i class="fa-solid fa-magnifying-glass" style="font-size: 48px; color: var(--border-color);"></i>
+    <h2 style="font-size: 22px; font-weight: 700;">No exact matches</h2>
+    <p style="color: var(--gray-text); font-size: 15px; line-height: 1.5;">Try changing or removing some of your filters or search keywords to discover listings.</p>
+    <a href="/listings" class="btn-primary" style="margin-top: 10px;">Clear Filters</a>
+  </div>
+<% } %>
